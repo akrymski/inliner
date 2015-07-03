@@ -4,15 +4,21 @@
   "description": "Utility to inline images, CSS and JavaScript for a web page - useful for mobile sites",
   "homepage": "http://github.com/remy/inliner",
   "main": "inliner",
-  "keywords": ["mobile", "inline", "production", "build", "minify"],
+  "keywords": [
+    "mobile",
+    "inline",
+    "production",
+    "build",
+    "minify"
+  ],
   "author": {
     "name": "Remy Sharp",
     "web": "http://github.com/remy"
   },
   "dependencies": {
+    "commander": "0.5.1",
     "jsdom": "0.6.5",
-    "uglify-js": "1.2.2",
-    "commander": "0.5.1"
+    "uglify-js": "^2.4.23"
   },
   "repository": {
     "type": "git",

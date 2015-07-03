@@ -1,6 +1,6 @@
 var URL = require('url'),
     util = require('util'),
-    jsmin = require('./jsmin'),
+    //jsmin = require('./jsmin'),
     events = require('events'),
     Buffer = require('buffer').Buffer,
     fs = require('fs'),
@@ -227,7 +227,7 @@ function Inliner(url, options, callback) {
               }
 
               // don't compress already minified code
-              if(!(/\bmin\b/).test(src) && !(/google-analytics/).test(src)) { 
+              if(inliner.options.compressJS && !(/\bmin\b/).test(src) && !(/google-analytics/).test(src)) { 
                 inliner.todo++;
                 inliner.total++;
                 inliner.emit('jobs', (inliner.total - inliner.todo) + '/' + inliner.total);
@@ -531,7 +531,7 @@ Inliner.prototype.getImportCSS = function (rooturl, css, callback) {
         
         css = css.replace(match[0], importedCSS);
         inliner.getImportCSS(rooturl, css, callback);
-      });          
+      });
     }
   } else {
     if (inliner.options.compressCSS) css = compressCSS(css);
@@ -539,7 +539,14 @@ Inliner.prototype.getImportCSS = function (rooturl, css, callback) {
   }
 };
 
-Inliner.defaults = function () { return { compressCSS: true, collapseWhitespace: true, images: true }; };
+Inliner.defaults = function () { 
+  return { 
+    compressCSS: true, 
+    compressJS: true,
+    collapseWhitespace: true, 
+    images: true 
+  }; 
+};
 
 var makeRequest = Inliner.makeRequest = function (url, extraOptions) {
   var oURL = URL.parse(url),

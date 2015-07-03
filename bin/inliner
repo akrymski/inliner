@@ -16,7 +16,7 @@ fs.realpath(__filename, function(error, script) {
     .version(Inliner.version)
     .usage('[options] http://yoursite.com')
     .option('-v, --verbose', 'echo on STDERR the progress of inlining')
-    .option('-n, --nocompress', "don't compress CSS or HTML - useful for debugging")
+    .option('-n, --nocompress', "don't compress CSS or HTML or JS - useful for debugging")
     .option('-i, --images', "don't encode images - keeps files size small, but more requests")
     //.option('-s, --share', "create jsbin.com url for HTML page")
     //.option('-h, --help', "help - you're looking at it");
@@ -39,6 +39,7 @@ fs.realpath(__filename, function(error, script) {
 
   if (program.nocompress) {
     options.compressCSS = false;
+    options.compressJS = false;
     options.collapseWhitespace = false;
   }
 
